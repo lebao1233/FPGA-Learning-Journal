@@ -1,0 +1,4 @@
+IO_LOC "switch" 3;
+IO_LOC "led" 10;
+IO_LOC "clk" 52;
+IO_PORT "switch" PULL_MODE=UP;

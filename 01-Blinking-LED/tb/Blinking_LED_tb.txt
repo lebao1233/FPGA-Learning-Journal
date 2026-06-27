@@ -1,0 +1,40 @@
+module ledblink_tb;
+  reg clk0;
+  reg rst_n;
+  reg switch;
+  wire [5:0] led;
+  ledblink  DUT(.clk(clk0),
+                .rst_n(rst_n),
+                .switch(switch),
+               .led(led));
+  always #1 clk0=~clk0;
+  initial begin 
+    clk0=0;
+    rst_n=0;
+    switch=1;
+
+     $dumpfile("dump.vcd");
+    $dumpvars(0, ledblink_tb);
+    #5;
+    rst_n = 1;
+
+    
+    #100;
+
+    // Nhấn switch (active low)
+    switch = 0;
+    #20;
+
+    
+    switch = 1;
+    #100;
+
+    rst_n = 0;
+    #10;
+    rst_n = 1;
+
+    #100;
+    #200;
+$finish;
+  end
+endmodule

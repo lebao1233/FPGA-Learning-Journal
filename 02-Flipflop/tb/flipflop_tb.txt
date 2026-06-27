@@ -1,0 +1,26 @@
+module flip_flop_tb();
+  reg switch;
+  wire led;
+  reg clk;
+  integer i;
+  integer j;
+  flip_flop DUT(
+    .i_switch_1(switch),
+    .i_Clk(clk),
+    .o_LED(led));
+  always begin 
+    #5 clk=~clk; end
+   initial begin
+    $dumpfile("dump.vcd");
+     $dumpvars(0, flip_flop_tb);
+     {switch, clk}=2'b00;
+     #10;
+     #10 switch =1;
+     #20 switch =0;
+     
+     #30  switch =1;
+     #25  switch =0;
+     #20;
+       $finish;
+       end
+       endmodule
