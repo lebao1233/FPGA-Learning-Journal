@@ -1,13 +1,16 @@
+// Code your testbench here
+// or browse Examples
+//switch active-low
 module ledblink_tb;
   reg clk0;
   reg rst_n;
   reg switch;
   wire [5:0] led;
-  ledblink  DUT(.clk(clk0),
+  ledblink  #(.counter(5))DUT(.clk(clk0),
                 .rst_n(rst_n),
                 .switch(switch),
                .led(led));
-  always #1 clk0=~clk0;
+  always #10 clk0=~clk0;
   initial begin 
     clk0=0;
     rst_n=0;
@@ -21,7 +24,7 @@ module ledblink_tb;
     
     #100;
 
-    // Nhấn switch (active low)
+   
     switch = 0;
     #20;
 
